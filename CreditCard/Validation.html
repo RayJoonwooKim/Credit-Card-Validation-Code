@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <script>
+        function validCredit()
+        {
+            var val = document.getElementById("credit_number").value;
+            var sum1 = 0;
+            var sum2 = 0;
+
+            var RegexDigit = /^\d{16}$/;
+
+            if (val.match(RegexDigit))
+            {
+                for (var i = val.length - 1; i > 0 ; i -= 2) {
+                    sum2 += Number.parseInt(val[i]);
+                }
+                for (var i = val.length - 2; i >= 0 ; i -= 2) {
+                    var multiply = Number.parseInt(val[i]) * 2;
+                    if (multiply > 9) {
+                        var string_value = multiply.toString();
+                        multiply = Number.parseInt(string_value.charAt(0)) + Number.parseInt(string_value.charAt(1));
+                    }
+                    sum1 += multiply;
+                }
+                document.writeln(sum1);
+                document.writeln(sum2);
+
+                var sum = sum1 + sum2;
+
+                if ((sum % 10) === 0) {
+                    return true;
+                }
+                return false;
+            }
+            else
+            {
+                alert("You must enter valid credit card number!");
+            }
+        }
+    </script>
+    <input type="text" id="credit_number"/>
+    <button onclick="alert(validCredit(credit_number))">Validate</button>
+
+    
+</body>
+</html>
